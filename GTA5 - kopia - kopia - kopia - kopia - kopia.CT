@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Öppna fusk"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <Color>FF0000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+autoAssemble([[
+aobscanmodule(WorldPTR,GTA5.exe,48 8B 05 ? ? ? ? 45 ? ? ? ? 48 8B 48 08 48 85 C9 74 07)
+registersymbol(WorldPTR)
+aobscanmodule(BlipPTR,GTA5.exe,4C 8D 05 ? ? ? ? 0F B7 C1)
+registersymbol(BlipPTR)
+aobscanmodule(PlayerCountPTR,GTA5.exe,48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B C8 E8 ? ? ? ? 48 8B CF)
+registersymbol(PlayerCountPTR)
+aobscanmodule(GetPointerAddressA,GTA5.exe,4D 89 B4 F7 xx xx xx xx 48 8B 74 24)
+registersymbol(GetPointerAddressA)
+aobscanmodule(GlobalPTR,GTA5.exe,4C 8D 05 ? ? ? ? 4D 8B 08 4D 85 C9 74 11)
+registersymbol(GlobalPTR)
+]])
+local addr = getAddress("WorldPTR")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("WorldPTR")
+registerSymbol("WorldPTR", addr, true)
+addr = getAddress("BlipPTR")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("BlipPTR")
+registerSymbol("BlipPTR", addr, true)
+local addr = getAddress("playerCountPTR")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("PlayerCountPTR")
+registerSymbol("PlayerCountPTR", addr, true)
+local addr = getAddress("GetPointerAddressA")
+addr = addr + 4
+addr = readInteger(addr)
+addr = addr + getAddress("GTA5.exe")
+unregisterSymbol("GetPointerAddressA")
+registerSymbol("GetPointerAddressA", addr, true)
+local addr=getAddress("GlobalPTR")
+addr=addr+readInteger(addr+3)+7
+unregisterSymbol("GlobalPTR")
+registerSymbol("GlobalPTR",addr,true)
+[DISABLE]
+unregisterSymbol("WorldPTR")
+unregisterSymbol("BlipPTR")
+unregisterSymbol("PlayerCountPTR")
+unregistersymbol(GetPointerAddressA)
+unregisterSymbol(GlobalPTR)
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Activate</Action>
+          <Keys>
+            <Key>45</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound TTS="EN">The cheat has been injected</ActivateSound>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>47</ID>
+          <Description>"Local Player"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>FFFFFF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>26</ID>
+              <Description>"Nuvarande Vapen"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>FF0000</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>WorldPTR</Address>
+              <Offsets>
+                <Offset>20</Offset>
+                <Offset>10C8</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>38</ID>
+                  <Description>"Obegränsad ammunition"</Description>
+                  <LastState/>
+                  <Color>000000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+aobscanmodule(ammo,GTA5.exe,41 2B D1 E8)
+ammo:
+  db 90 90 90
+registersymbol(ammo)
+
+[DISABLE]
+ammo:
+  db 41 2B D1
+unregistersymbol(ammo)
+</AssemblerScript>
+                  <Hotkeys>
+                    <Hotkey>
+                      <Action>Toggle Activation</Action>
+                      <Keys>
+                        <Key>17</Key>
+                        <Key>18</Key>
+                        <Key>49</Key>
+                      </Keys>
+                      <Description>unlimited bullets</Description>
+                      <ID>0</ID>
+                      <ActivateSound TTS="EN">unlimited bullets activated</ActivateSound>
+                      <DeactivateSound TTS="EN">unlimited bullets activated</DeactivateSound>
+                    </Hotkey>
+                  </Hotkeys>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1015</ID>
+                  <Description>"Obegränsat magasin"</Description>
+                  <LastState/>
+                  <Color>000000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+aobscanmodule(clip,GTA5.exe,41 2B C9 3B C8 0F)
+clip:
+  db 90 90 90
+registersymbol(clip)
+
+[DISABLE]
+clip:
+  db 41 2B C9
+unregistersymbol(clip)
+</AssemblerScript>
+                  <Hotkeys>
+                    <Hotkey>
+                      <Action>Toggle Activation</Action>
+                      <Keys>
+                        <Key>17</Key>
+                        <Key>18</Key>
+                        <Key>50</Key>
+                      </Keys>
+                      <Description>unlimited magazine </Description>
+                      <ID>0</ID>
+                      <ActivateSound TTS="EN">unlimited magazine activated</ActivateSound>
+                      <DeactivateSound TTS="EN">unlimited magazine deactivated</DeactivateSound>
+                    </Hotkey>
+                  </Hotkeys>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1008</ID>
+              <Description>"Teleportering"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>FF0000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>50</ID>
+                  <Description>"Teleportera till vald GPS"</Description>
+                  <LastState/>
+                  <Color>000000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+local a = getAddress("BlipPTR")
+for i = 2000, 1, -1
+do
+  local n = readPointer(a + (i * 8))
+  if (n &gt; 0) and (8 == readInteger(n + 0x40)) and (84 == readInteger(n + 0x48))
+  then
+    local x = readFloat(n + 0x10)
+    local y = readFloat(n + 0x14)
+    local p = readPointer(readPointer(getAddress("WorldPTR")) + 8)
+    if (2 == readInteger(p + 0x1468))
+    then
+      p = readPointer(p + 0xD28)
+    end
+    local v = readPointer(p + 0x30)
+    writeFloat(v + 0x50, x)
+    writeFloat(v + 0x54, y)
+    writeFloat(v + 0x58, -210)
+    writeFloat(p + 0x90, x)
+    writeFloat(p + 0x94, y)
+    writeFloat(p + 0x98, -210)
+  end
+end
+[DISABLE]
+{$lua}
+local a = getAddress("BlipPTR")
+for i = 2000, 1, -1
+do
+  local n = readPointer(a + (i * 8))
+  if (n &gt; 0) and (8 == readInteger(n + 0x40)) and (84 == readInteger(n + 0x48))
+  then
+    local x = readFloat(n + 0x10)
+    local y = readFloat(n + 0x14)
+    local p = readPointer(readPointer(getAddress("WorldPTR")) + 8)
+    if (2 == readInteger(p + 0x1468))
+    then
+      p = readPointer(p + 0xD28)
+    end
+    local v = readPointer(p + 0x30)
+    writeFloat(v + 0x50, x)
+    writeFloat(v + 0x54, y)
+    writeFloat(v + 0x58, -210)
+    writeFloat(p + 0x90, x)
+    writeFloat(p + 0x94, y)
+    writeFloat(p + 0x98, -210)
+  end
+end
+</AssemblerScript>
+                  <Hotkeys>
+                    <Hotkey>
+                      <Action>Toggle Activation</Action>
+                      <Keys>
+                        <Key>220</Key>
+                      </Keys>
+                      <Description>teleportation </Description>
+                      <ID>0</ID>
+                      <ActivateSound TTS="EN">teleportation successful. This cheat was coded by DEQVIST</ActivateSound>
+                      <DeactivateSound TTS="EN">teleportation successful. This cheat was coded by DEQVIST</DeactivateSound>
+                    </Hotkey>
+                  </Hotkeys>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
